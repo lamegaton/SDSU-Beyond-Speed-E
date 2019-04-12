@@ -29,40 +29,43 @@
  *
  *******************************************************************************/
 
+#define TRIGGER UNKNOWNPIN00
+#define ECHO UNKNOWNPIN01
+
 #include <lmic.h>
 #include <hal/hal.h>
 #include <SPI.h>
 
-//FOR NUMBER #2
-// LoRaWAN NwkSKey, network session key
+/********************************
+ * FOR NUMBER #2
+ * *****************************/
+
 static const PROGMEM u1_t NWKSKEY[16] ={ 0xC4, 0x8A, 0x2F, 0xA5, 0x80, 0x2D, 0x70, 0x18, 0x9A, 0xDD, 0x06, 0x57, 0xEC, 0xC7, 0xDB, 0x7C };
-// LoRaWAN AppSKey, application session key
 static const u1_t PROGMEM APPSKEY[16] ={ 0x5C, 0x1A, 0x2F, 0x0B, 0x53, 0x37, 0x08, 0x64, 0xD0, 0x6A, 0x75, 0xD0, 0x99, 0x84, 0x6E, 0x54 };
-// LoRaWAN end-device address (DevAddr)
 static const u4_t DEVADDR = 0x26011E1D; 
 
+/********************************
+ * DEFINE VARIABLES FOR SENSOR
+ * ******************************/
+long duration;
+long distance;
+long distanceThreshold = 120; //10 feet range threshold
+int vehicleCount = 0;
+int Vehicle_Detected_Confidence_Level = 0;
+
 // These callbacks are only used in over-the-air activation, so they are
-// left empty here (we cannot leave them out completely unless
-// DISABLE_JOIN is set in config.h, otherwise the linker will complain).
 void os_getArtEui (u1_t* buf) { }
 void os_getDevEui (u1_t* buf) { }
 void os_getDevKey (u1_t* buf) { }
 
-static uint8_t mydata[] = "from SDSU fgf";
+//static uint8_t mydata[] = "from SDSU fgf";
+volatile uint8_t mydata = 0;
+
 static osjob_t sendjob;
 
 // Schedule TX every this many seconds (might become longer due to duty
 // cycle limitations).
-const unsigned TX_INTERVAL = 10;
-
-// Pin mapping arduino uno WORKED!
-//// Pin mapping NodeMCU 32
-//const lmic_pinmap lmic_pins = {
-//  .nss = 5,
-//  .rxtx = LMIC_UNUSED_PIN,
-//  .rst = 14,
-//  .dio = {2,32,33},//dio0,1,2
-//};
+const unsigned TX_INTERVAL = 30;
 
 // Pin mapping for arduino nano
 const lmic_pinmap lmic_pins = {
@@ -151,14 +154,9 @@ void do_send(osjob_t* j){
 
 void setup() {
     Serial.begin(115200);
+    pinMode(TRIGGER, OUTPUT);
+    pinMode(ECHO, INPUT);
     Serial.println(F("Starting"));
-
-    #ifdef VCC_ENABLE
-    // For Pinoccio Scout boards
-    pinMode(VCC_ENABLE, OUTPUT);
-    digitalWrite(VCC_ENABLE, HIGH);
-    delay(1000);
-    #endif
 
     // LMIC init
     os_init();
@@ -181,30 +179,7 @@ void setup() {
     LMIC_setSession (0x1, DEVADDR, NWKSKEY, APPSKEY);
     #endif
 
-    #if defined(CFG_eu868)
-    // Set up the channels used by the Things Network, which corresponds
-    // to the defaults of most gateways. Without this, only three base
-    // channels from the LoRaWAN specification are used, which certainly
-    // works, so it is good for debugging, but can overload those
-    // frequencies, so be sure to configure the full frequency range of
-    // your network here (unless your network autoconfigures them).
-    // Setting up channels should happen after LMIC_setSession, as that
-    // configures the minimal channel set.
-    // NA-US channels 0-71 are configured automatically
-    LMIC_setupChannel(0, 868100000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      // g-band
-    LMIC_setupChannel(1, 868300000, DR_RANGE_MAP(DR_SF12, DR_SF7B), BAND_CENTI);      // g-band
-    LMIC_setupChannel(2, 868500000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      // g-band
-    LMIC_setupChannel(3, 867100000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      // g-band
-    LMIC_setupChannel(4, 867300000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      // g-band
-    LMIC_setupChannel(5, 867500000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      // g-band
-    LMIC_setupChannel(6, 867700000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      // g-band
-    LMIC_setupChannel(7, 867900000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      // g-band
-    LMIC_setupChannel(8, 868800000, DR_RANGE_MAP(DR_FSK,  DR_FSK),  BAND_MILLI);      // g2-band
-    // TTN defines an additional channel at 869.525Mhz using SF9 for class B
-    // devices' ping slots. LMIC does not have an easy way to define set this
-    // frequency and support for class B is spotty and untested, so this
-    // frequency is not configured here.
-    #elif defined(CFG_us915)
+    #if defined(CFG_us915)
     // NA-US channels 0-71 are configured automatically
     // but only one group of 8 should (a subband) should be active
     // TTN recommends the second sub band, 1 in a zero based count.
@@ -216,18 +191,7 @@ void setup() {
     // Then enable the channel(s) you want to use
     LMIC_enableChannel(8); // 903.9 MHz
     //LMIC_selectSubBand(1);
-    #elif defined(CFG_eu433)
-      LMIC_setupChannel(0, 433175000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);// g-band
-      LMIC_setupChannel(1, 433375000, DR_RANGE_MAP(DR_SF12, DR_SF7B), BAND_CENTI);      // g-band
-      LMIC_setupChannel(2, 433575000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      // g-band
-      LMIC_setupChannel(3, 433775000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      // g-band
-      LMIC_setupChannel(4, 433975000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      // g-band
-      LMIC_setupChannel(5, 434175000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      // g-band
-      LMIC_setupChannel(6, 434375000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      // g-band
-      LMIC_setupChannel(7, 434575000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      // g-band
-      LMIC_setupChannel(8, 434775000, DR_RANGE_MAP(DR_FSK,  DR_FSK),  BAND_MILLI);      // g2-band  
     #endif
-
     // Disable link check validation
     LMIC_setLinkCheckMode(0);
 
@@ -241,6 +205,32 @@ void setup() {
     do_send(&sendjob);
 }
 
+void countVehicle()
+{
+  digitalWrite(TRIGGER, LOW); // Setting Trigger Pin Low for 2 microseconds
+  delayMicroseconds(2);
+  digitalWrite(TRIGGER, HIGH); // Setting Trigger Pin High for 10 microseconds to trigger ranging
+  delayMicroseconds(10);
+  digitalWrite(TRIGGER, LOW); // Setting Trigger Pin Low
+  
+  duration = pulseIn(ECHO, HIGH);
+  distance = ((duration/2)/29.1)/2.54; 
+
+  if (distance <= distanceThreshold)
+  {
+    Vehicle_Detected_Confidence_Level ++;
+  }
+  else 
+  {
+    if (Vehicle_Detected_Confidence_Level > 3) {
+      vehicleCount  =  vehicleCount + 1;
+    } 
+    Vehicle_Detected_Confidence_Level = 0;
+  }
+  mydata = vehicleCount;
+}
+
 void loop() {
+  
     os_runloop_once();
 }
