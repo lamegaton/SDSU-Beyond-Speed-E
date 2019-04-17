@@ -1,3 +1,4 @@
+Because we use open source code and libraries so there is no point we should close source
 # Sensor
 # Communication
 ## Notes for team:
