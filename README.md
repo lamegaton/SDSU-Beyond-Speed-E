@@ -7,18 +7,11 @@ Please take a look and build our wiki page https://github.com/lamegaton/Comm-and
 3. If you want to upload a new code with lmic, you have to change NWKey and APPKey
 4. change trig time to 20s and echo to 2s
 
-Team Member
-
-Mahrlo Amposta
-
-Ernesto Rodriguez
-
-Christian Rizzo
-
-Adam Cruz
-
-Mark Ewest
-
-Mayra Pulido
-
+Our team member
+Mahrlo Amposta,
+Ernesto Rodriguez,
+Christian Rizzo,
+Adam Cruz,
+Mark Ewest,
+Mayra Pulido,
 Son Pham
