@@ -1,4 +1,4 @@
-Because we use open source code and libraries so there is no point we should close source
+Please take a look and build our wiki page https://github.com/lamegaton/Comm-and-Sensor---Speed-e/wiki
 # Sensor
 # Communication
 ## Notes for team:
