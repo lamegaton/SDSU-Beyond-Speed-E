@@ -8,10 +8,17 @@ Please take a look and build our wiki page https://github.com/lamegaton/Comm-and
 4. change trig time to 20s and echo to 2s
 
 Team Member
+
 Mahrlo Amposta
+
 Ernesto Rodriguez
+
 Christian Rizzo
+
 Adam Cruz
+
 Mark Ewest
+
 Mayra Pulido
+
 Son Pham
