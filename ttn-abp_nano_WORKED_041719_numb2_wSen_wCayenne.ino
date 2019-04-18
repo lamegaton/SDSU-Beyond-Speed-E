@@ -30,7 +30,7 @@ static const u4_t DEVADDR = 0x260217D3 ;
  * ******************************/
 long duration;
 long distance;
-long distanceThreshold = 20; //10 feet range threshold
+long distanceThreshold = 100; //10 feet range threshold
 int vehicleCount = 0;
 int Vehicle_Detected_Confidence_Level = 0;
 //MAX AND MIN VALUE FOR CALIBRATION
@@ -101,15 +101,15 @@ void readSensor(){
 void countCar(){
   if (distance < distanceThreshold)
   {
-    Serial.println('1');
     Vehicle_Detected_Confidence_Level ++;
   }
   else 
   {
-    Serial.println('0');
-    if (Vehicle_Detected_Confidence_Level > 3) {
+    //Serial.println('0');
+    if (Vehicle_Detected_Confidence_Level >= 100) {
       vehicleCount ++;
       //Serial.print("Vehicle #: ");
+      Serial.print("Vehicle Count");
       Serial.println(vehicleCount);    
     } 
     Vehicle_Detected_Confidence_Level = 0;
