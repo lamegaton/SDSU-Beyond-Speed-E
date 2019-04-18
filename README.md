@@ -1,5 +1,9 @@
 Please take a look and build our wiki page https://github.com/lamegaton/Comm-and-Sensor---Speed-e/wiki
 # Sensor
+1. confidence level of car is around 5-7
+2. our max distance is 14 feet from the curve to the first white stripe line\
+3.
+
 # Communication
 ## Notes for team:
 1. Please write code in block or function so we can easily intergrate
