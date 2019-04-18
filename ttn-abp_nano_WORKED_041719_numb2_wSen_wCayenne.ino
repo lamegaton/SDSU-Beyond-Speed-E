@@ -30,7 +30,7 @@ static const u4_t DEVADDR = 0x260217D3 ;
  * ******************************/
 long duration;
 long distance;
-long distanceThreshold = 0; //10 feet range threshold
+long distanceThreshold = 20; //10 feet range threshold
 int vehicleCount = 0;
 int Vehicle_Detected_Confidence_Level = 0;
 //MAX AND MIN VALUE FOR CALIBRATION
@@ -61,6 +61,7 @@ const lmic_pinmap lmic_pins = {
 /********************************
  * CALIBRATION
  ********************************/
+/*
 void calibration(){
   pinMode(13, OUTPUT);
   while(millis() < 10000){
@@ -80,7 +81,7 @@ void calibration(){
   Serial.print("Min: ");Serial.println(sensorMin);
   distanceThreshold = sensorMin - 2;
 }
-
+*/
 void readSensor(){
   digitalWrite(TRIGGER, LOW); // Setting Trigger Pin Low for 2 microseconds
   delayMicroseconds(5);
@@ -98,18 +99,18 @@ void readSensor(){
  * COUNT VEHICLE FUNCTION
  ********************************/
 void countCar(){
-  if (distance <= distanceThreshold)
+  if (distance < distanceThreshold)
   {
-    Serial.print(distance);
-    Serial.println(" inches ");
+    Serial.println('1');
     Vehicle_Detected_Confidence_Level ++;
   }
   else 
   {
+    Serial.println('0');
     if (Vehicle_Detected_Confidence_Level > 3) {
       vehicleCount ++;
-      Serial.print("Vehicle #: ");
-      Serial.println(vehicleCount);
+      //Serial.print("Vehicle #: ");
+      Serial.println(vehicleCount);    
     } 
     Vehicle_Detected_Confidence_Level = 0;
   }
@@ -203,7 +204,7 @@ void setup() {
     pinMode(TRIGGER, OUTPUT);
     pinMode(ECHO, INPUT);
     Serial.begin(115200);
-    calibration();
+    //calibration();
     Serial.println(F("Starting"));
 
     // LMIC init
