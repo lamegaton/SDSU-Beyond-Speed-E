@@ -1,21 +1,24 @@
-//Cayenne
-#include <CayenneLPP.h>
+/********************************
+ * ENABLE CODE
+ ********************************/
 //PIN FOR SENSOR
 #define TRIGGER 8 //orange 
 #define ECHO 9 //yellow
-//#define PROGMEM
+
+//ENABLE FUNCTIONS
+#define ABP = 1
+#define OTAA = 0
+#define SENSOR_ONLY 1
+
+#if SENSOR_ONLY == 0
+//Cayenne
+#include <CayenneLPP.h>
 //Lib for lora
 #include <lmic.h>
 #include <hal/hal.h>
 #include <SPI.h>
 //#include <node_config.h>
-
-/********************************
- * ENABLE CODE
- ********************************/
-#define ABP = 1
-#define OTAA = 0
-#define SENSOR_ONLY 1
+#endif
 
 /********************************
  * DEFINE VARIABLES FOR SENSOR
@@ -23,7 +26,7 @@
 byte offset = 2;
 long duration;
 long distance;
-long distanceThreshold = 100; //10 feet range threshold
+long distanceThreshold = 12*14; //14 feets
 int vehicleCount = 0;
 int Vehicle_Detected_Confidence_Level = 0;
 //MAX AND MIN VALUE FOR CALIBRATION
@@ -241,7 +244,7 @@ void countCar(){
   else 
   {
     //Serial.println('0');
-    if (Vehicle_Detected_Confidence_Level >= 15) {
+    if (Vehicle_Detected_Confidence_Level >= 5) {
       vehicleCount ++;
       //Serial.print("Vehicle #: ");
       Serial.print("Vehicle Count ");
