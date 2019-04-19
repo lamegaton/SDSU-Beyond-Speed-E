@@ -1,9 +1,12 @@
 Please take a look and build our wiki page https://github.com/lamegaton/Comm-and-Sensor---Speed-e/wiki
+# Power
+1. library we are using: https://github.com/rocketscream/Low-Power
+
+
 # Sensor
 1. confidence level of car is around **5-7**
 2. our max distance is 14 feet from the curve to the first white stripe line
 3. on **04/18/2019**, we remove calibration code because it's not important
-
 
 # Communication
 ## Notes for team:
