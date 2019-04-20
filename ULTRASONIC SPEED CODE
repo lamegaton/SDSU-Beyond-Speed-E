@@ -29,7 +29,7 @@ void loop()
    distance2 = ultrasonicRead(); //calls ultrasoninicRead() function below
    
    //formula change in distance divided by change in time
-   speed = (distance2 - distance1)/1.0; //as the time gap is 0.3 sec we divide it by 1
+   speed = (distance2 - distance1)/1.0; //as the time gap is 1 sec we divide it by 1
    
 //Displaying speed
   Serial.print("Speed in cm/s  :  "); 
