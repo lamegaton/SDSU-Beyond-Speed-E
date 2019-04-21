@@ -1,4 +1,6 @@
 Please take a look and build our wiki page https://github.com/lamegaton/Comm-and-Sensor---Speed-e/wiki
+new line = two space 
+
 # Power
 1. library we are using: https://github.com/rocketscream/Low-Power
 
@@ -27,7 +29,7 @@ Please take a look and build our wiki page https://github.com/lamegaton/Comm-and
 
 ## User interface
 https://developers.google.com/maps/documentation/javascript/overlays?csw=1#ImageMapTypes
-https://developer.tomtom.com/maps-sdk-web/functional-examples#traffic-flow-segments
+https://developer.tomtom.com/maps-sdk-web/functional-examples#traffic-flow-segments  
 what we want to achieve at this point is showing **red** segment when **car <= 6**
 and showing **green** segment when **car > 24**
 
