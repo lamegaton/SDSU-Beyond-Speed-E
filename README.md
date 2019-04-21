@@ -17,7 +17,10 @@ Please take a look and build our wiki page https://github.com/lamegaton/Comm-and
 4. 
 
 ## Location
-1. Node 1:   
+1. Gateway:  
+32.777651, -117.070372  
+
+2. Node 1:   
 32°46'43.9"N 117°04'23.6"W  
 32.778863, -117.073228  
 
