@@ -22,9 +22,8 @@ Please take a look and build our wiki page https://github.com/lamegaton/Comm-and
 
 2. Node 1:   
 32°46'43.9"N 117°04'23.6"W  
-32.778863, -117.073228  
-
-2.
+32.778863, -117.073228 (end segment -- sensor position)  
+32.778916, -117.074302 (start segment)  
 
 ## User interface
 https://developers.google.com/maps/documentation/javascript/overlays?csw=1#ImageMapTypes
