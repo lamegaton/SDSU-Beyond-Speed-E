@@ -12,8 +12,9 @@ Please take a look and build our wiki page https://github.com/lamegaton/Comm-and
 
 # Communication
 1. planning to use different spreading factor for diffrent node
-2.
-3.
+2. We've trying to get the downlink from TTN from node 
+3. For testing and increase the range, we set the gateway to single channel and single Spreading factor (10)
+4. 
 
 ## Notes for team:
 1. Please write code in block or function so we can easily intergrate
