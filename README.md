@@ -27,20 +27,16 @@ new line = two space
 32.778863, -117.073228 (end segment -- sensor position)  
 32.778916, -117.074302 (start segment)  
 
-[-117.073230,32.778938]
-[ -117.074297,32.778976]	
-[ -117.073812,32.778647]	center 
-
 
 ## User interface
 https://developers.google.com/maps/documentation/javascript/overlays?csw=1#ImageMapTypes
-https://developer.tomtom.com/maps-sdk-web/functional-examples#traffic-flow-segments  
 https://docs.mapbox.com/mapbox-gl-js/api/#customlayerinterface  
 
 https://angus.readthedocs.io/en/2014/amazon/transfer-files-between-instance.html  
   
-what we want to achieve at this point is showing **red** segment when **car <= 6**
+what we want to achieve at this point is showing **red** segment when **car <= 8** and **car > 3**
 and showing **green** segment when **car > 24** (look at matlab file to see our logic)
+
 We can use this instead:  
 https://developer.tomtom.com/maps-sdk-web/functional-examples#map-vector-geojson  
 or another option: mapbox  
