@@ -27,6 +27,13 @@ new line = two space
 32.778863, -117.073228 (end segment -- sensor position)  
 32.778916, -117.074302 (start segment)  
 
+|Point |	location |	note
+|---|---|---|
+|1	|32.778949, -117.072468	|only work at this point
+|2	|32.778953, -117.071395	|the gateway recieves signal from node2 to node3
+|3	|32.778955, -117.070642	|
+|gateway|	32.777651, -117.070372|	
+
 
 ## User interface
 https://developers.google.com/maps/documentation/javascript/overlays?csw=1#ImageMapTypes
