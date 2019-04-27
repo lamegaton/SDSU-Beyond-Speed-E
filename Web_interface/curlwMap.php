@@ -63,7 +63,7 @@ src="https://maps.googleapis.com/maps">
 	var div = document.getElementById("dom-target");
 	var mydata = div.textContent;
 	var myjson = JSON.parse(mydata);
-	var index = myjson.length;
+	var index = myjson.length - 1;
 	document.getElementById("test").innerHTML = myjson[index].presence_1;
 	var map;
 	var streetColor;
