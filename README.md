@@ -63,4 +63,4 @@ https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/F
 4. Adam Cruz (sensor, housing)
 5. Mark Ewest (user interface)
 6. Mayra Pulido  (user interface)
-7. Son Pham (sensor, communication)
+7. Son Pham - lamegaton (sensor, communication)
