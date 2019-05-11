@@ -16,7 +16,10 @@ new line = two space
 1. planning to use different spreading factor for diffrent node
 2. We've trying to get the downlink from TTN from node 
 3. For testing and increase the range, we set the gateway to single channel and single Spreading factor (10)
-4. 
+## Lmic
+    os_setTimedCallback(&sendjob, os_getTime() + ms2osticks(10), do_send);  //do a send
+    
+
 
 ## Location
 1. Gateway:  
