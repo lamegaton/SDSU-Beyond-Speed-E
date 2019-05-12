@@ -17,8 +17,12 @@ new line = two space
 2. We've trying to get the downlink from TTN from node 
 3. For testing and increase the range, we set the gateway to single channel and single Spreading factor (10)
 ## Lmic
-    os_setTimedCallback(&sendjob, os_getTime() + ms2osticks(10), do_send);  //do a send
-    
+`os_setTimedCallback(&sendjob, os_getTime() + ms2osticks(10), do_send);  //do a send`  
+  
+Schedule time to send  
+  
+`#define ms2osticks(ms)   ((ostime_t)( ((s8_t)(ms) * OSTICKS_PER_SEC)    / 1000)) // or using us2osticks`  
+`os_runloop_once(); //check status `
 
 
 ## Location
