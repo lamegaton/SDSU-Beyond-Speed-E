@@ -185,16 +185,6 @@ void iniLora(){
     // LMIC init
     os_init();
     LMIC_reset();
-    #ifdef PROGMEM
-    uint8_t appskey[sizeof(APPSKEY)];
-    uint8_t nwkskey[sizeof(NWKSKEY)];
-    memcpy_P(appskey, APPSKEY, sizeof(APPSKEY));
-    memcpy_P(nwkskey, NWKSKEY, sizeof(NWKSKEY));
-    LMIC_setSession (0x13, DEVADDR, nwkskey, appskey);//can be 0x1
-    #else
-    // If not running an AVR with PROGMEM, just use the arrays directly
-    LMIC_setSession (0x13, DEVADDR, NWKSKEY, APPSKEY);
-    #endif
 
     #if defined(CFG_us915)
     // First disable all sub-bands
