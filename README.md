@@ -1,4 +1,4 @@
-# Although the project deadline is due, I still want to working on it to have a stable product! (Son)
+# Although the project deadline is due, I still want to working on it to have a stable product!
 Please take a look and build our wiki page https://github.com/lamegaton/Comm-and-Sensor---Speed-e/wiki  
 new line = two space 
 
