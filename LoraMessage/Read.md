@@ -8,6 +8,6 @@ void LoraMessage::reset(){
 ```
 Aslo in LoraMessage.h add  
 ```
-		void reset();
+void reset();
 
 ```
