@@ -1,6 +1,6 @@
 # Status: Improving
 Please take a look and build our wiki page https://github.com/lamegaton/Comm-and-Sensor---Speed-e/wiki  
-I've changed the name to Beyond Speed-E because I wanted to improve and make this work for any sensors.
+I've changed the name to **Beyond Speed-E** because I wanted to improve and make this work for any sensors.
 new line = two space 
 
 # Power
