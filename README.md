@@ -23,8 +23,10 @@ new line = two space
 Schedule time to send  
   
 `#define ms2osticks(ms)   ((ostime_t)( ((s8_t)(ms) * OSTICKS_PER_SEC)    / 1000)) // or using us2osticks`  
-`os_runloop_once(); //check status `
+`os_runloop_once(); //check status `  
 
+Disable Adaptive Data Rate  
+`LMIC_setAdrMode(false); `  
 
 ## Location
 1. Gateway:  
