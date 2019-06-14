@@ -5,16 +5,17 @@
   This example code is in the public domain.
   http://www.arduino.cc/en/Tutorial/Smoothing
 */
-const int numReadings = 80;
+const int numReadings = 100;
 
-int readings[numReadings];      // the readings from the analog input
+float readings[numReadings];      // the readings from the analog input
 int readIndex = 0;              // the index of the current reading
 float total = 0;                  // the running total
 float average = 0;                // the average
-float out = 0;
 float cal = 0;
 int inputPin = A3;
 long result;
+float offset0 = 3.5;//3
+float offset1 = 0;//0.0005
 
 long readVcc() {
   // Read 1.1V reference against AVcc
@@ -44,7 +45,7 @@ void loop() {
   // subtract the last reading:
   total = total - readings[readIndex];
   // read from the sensor:
-  readings[readIndex] = analogRead(inputPin) + 3.5;
+  readings[readIndex] = analogRead(inputPin) + offset0;
   // add the reading to the total:
   total = total + readings[readIndex];
   // advance to the next position in the array:
@@ -60,7 +61,7 @@ void loop() {
   average = (total / numReadings);
   Serial.println(average);
   // send it to the computer as ASCII digits
-  out = average * 0.001075 + 0.0004;
-  Serial.println(out,4);
+  average = average * 0.001075 + offset1;
+  Serial.println(average,4);
   // delay in between reads for stability
 }
