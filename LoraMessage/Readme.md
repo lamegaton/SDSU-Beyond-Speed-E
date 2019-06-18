@@ -10,4 +10,8 @@ Aslo in LoraMessage.h add
 ```
 void reset();
 
-```
+```  
+  
+  error "bad memory allocation!"  
+  check the output data for message.addUnixtime ior .add16bit  
+  the reason is due to overflow
