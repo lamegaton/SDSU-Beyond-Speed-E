@@ -73,10 +73,10 @@ https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/F
 3. If you want to upload a new code with lmic, you have to change NWKey and APPKey
 
 # Our team member:  
-1. Mahrlo Amposta (power, design PCB) (amposta.mahrlo@gmail.com)
-2. Ernesto Rodriguez (presentation,power) (ernierodriguez619@gmail.com)
-3. Christian Rizzo (antenna)(chrisrizzo.ee.117@gmail.com)
-4. Adam Cruz - adamjohncruz (sensor, housing) (adamjohncruz@gmail.com)
-5. Mark Ewest (user interface) (markewest021@gmail.com)
-6. Mayra Pulido  (user interface)(pulido.mayra@hotmail.com)
-7. Son Pham - lamegaton (sensor, communication) (sonpham995@gmail.com)
+1. Mahrlo Amposta (power, design PCB)
+2. Ernesto Rodriguez (presentation,power)
+3. Christian Rizzo (antenna)
+4. Adam Cruz - adamjohncruz (sensor, housing)
+5. Mark Ewest (user interface)
+6. Mayra Pulido  (user interface)
+7. Son Pham - (sensor, communication)
