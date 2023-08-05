@@ -24,6 +24,8 @@ Length of wire antenna for:
 
 
 ## Lmic
+Please use the below library  
+https://github.com/mcci-catena/arduino-lmic  
 `os_setTimedCallback(&sendjob, os_getTime() + ms2osticks(10), do_send);  //do a send`  
   
 Schedule time to send  
